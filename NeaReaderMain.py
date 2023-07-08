@@ -18,11 +18,6 @@ class ImageShowWindow(QWidget):
         layout.addWidget(self.label)
         layout.addWidget(self.graphWidget)
         self.setLayout(layout)
-
-        hour = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        temperature = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
-
-        #self.graphWidget.plot(hour, temperature)
         self.graphWidget.show()
 
 class MainWindow(QMainWindow):
@@ -39,9 +34,9 @@ class MainWindow(QMainWindow):
         self.show_button = QPushButton("Show")
         self.choose_file_button = QPushButton("Choose file")
         self.combo = QComboBox()
-        self.combo.addItem("O3A raw")
-        self.combo.addItem("O3P raw")
-        self.combo.addItem("Z raw")
+        self.combo.addItems(['O0A raw', 'O0P raw', 'O1A raw', 'O1P raw', 'O2A raw', 'O2P raw', 'O3A raw', 'O3P raw',
+                             'O4A raw', 'O4P raw', 'O5A raw', 'O5P raw', 'Z raw', 'Z C', 'M0A raw', 'M0P raw',
+                             'M1A raw', 'M1P raw', ])
 
         self.show_button.clicked.connect(self.show_new_window)
         self.load_button.clicked.connect(self.load_gwy_channel)
@@ -67,13 +62,15 @@ class MainWindow(QMainWindow):
     def choose_file(self):
         fname = QFileDialog.getOpenFileName(self, "Choose GWY file","","Gwyddion files (*.gwy)")
         self.file_name = fname[0]
+
     def load_gwy_channel(self):
-        #obj = gwyfile.load('2022-04-09 123828 PH PLT-EV-niceplace_spectrum_1665_cm-1.gwy')
+        # obj = gwyfile.load('2022-04-09 123828 PH PLT-EV-niceplace_spectrum_1665_cm-1.gwy')
         obj = gwyfile.load(self.file_name)
         channels = gwyfile.util.get_datafields(obj)
         channel_name = self.combo.currentText()
         self.channel = channels[channel_name]
-        print(np.size(self.channel.data))
+        print(np.size(self.channel.data),'datapoints were loaded')
+
 
 app = QApplication(sys.argv)
 w = MainWindow()
