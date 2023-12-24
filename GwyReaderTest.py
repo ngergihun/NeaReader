@@ -9,6 +9,8 @@ channels = gwyfile.util.get_datafields(obj)
 channel = channels['O3A raw']
 # Datafield objects have a `data` property to access their
 # two-dimensional data as numpy arrays.
+print(list(channel.keys()))
+print(type(channel))
 
 # Plot the data using matplotlib.
 fig, ax = plt.subplots()

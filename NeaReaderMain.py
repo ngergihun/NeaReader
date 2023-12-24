@@ -64,13 +64,13 @@ class MainWindow(QMainWindow):
 
     def choose_file(self):
         fname = QFileDialog.getOpenFileName(self, "Choose GWY file","","Gwyddion files (*.gwy)")
+        print(fname)
         self.file_name = fname[0]
         obj = gwyfile.load(self.file_name)
         channels = gwyfile.util.get_datafields(obj)
         self.combo.addItems(list(channels.keys()))
 
     def load_gwy_channel(self):
-        # obj = gwyfile.load('2022-04-09 123828 PH PLT-EV-niceplace_spectrum_1665_cm-1.gwy')
         obj = gwyfile.load(self.file_name)
         channels = gwyfile.util.get_datafields(obj)
         channel_name = self.combo.currentText()
@@ -78,10 +78,10 @@ class MainWindow(QMainWindow):
         print(np.size(self.channel.data),'datapoints were loaded')
 
     def align_rows(self):
-        d = self.channel.data
-        for i in range(d.shape[0]):
-            d[i][:] = d[i][:]-np.median(d[i][:])
-        self.channel.dta = d
+        d = np.zeros(np.shape(self.channel.data))
+        for i in range(self.channel.data.shape[0]):
+            d[i][:] = self.channel.data[i][:]-np.median(self.channel.data[i][:])
+        self.channel.data = d
         self.image_window.graphWidget.setImage(self.channel.data)
 
 
