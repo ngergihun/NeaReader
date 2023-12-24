@@ -1,4 +1,5 @@
 import gwyfile
+import numpy as np
 
 class NeaImage:
     def __init__(self) -> None:
@@ -22,13 +23,20 @@ class NeaImage:
         gwyobj = gwyfile.load(self.filename)
         channels = gwyfile.util.get_datafields(gwyobj)
         channel = channels[self.channel_name]
+        self.isAmplitude()
 
         # Set a basic attributes from gwyddion field
         for key in channel:
             if key in dir(self):
                 setattr(self,key,channel[key])
+        self.data = channel.data
 
-    ######## OTHER FUNCTIONS ################
+    def isAmplitude(self):
+        if 'A' in self.channel_name:
+            self.isamp = True
+        else:
+            self.isamp = False
+
     def read_info_file(self,filename):
         # reader tested for neascan version 2.1.10719.0
         fid = open(filename,errors='replace')
@@ -80,4 +88,28 @@ class NeaImage:
                         infodict[fieldname] = val.strip()
         fid.close()
         return infodict
-    
+
+######### Correction functions ######
+# Line leveling
+def LineLevel(inputobj: NeaImage, type: str):
+    match type:
+        case 'median':
+            for i in range(inputobj.data.shape[0]):
+                if inputobj.isamp:
+                    inputobj.data[i][:] = inputobj.data[i][:]/np.median(inputobj.data[i][:])
+                else:
+                    inputobj.data[i][:] = inputobj.data[i][:]-np.median(inputobj.data[i][:])
+        case 'average':
+            for i in range(inputobj.data.shape[0]):
+                if inputobj.isamp:
+                    inputobj.data[i][:] = inputobj.data[i][:]/np.mean(inputobj.data[i][:])
+                else:
+                    inputobj.data[i][:] = inputobj.data[i][:]-np.mean(inputobj.data[i][:])
+        case 'difference':
+            for i in range(inputobj.data.shape[0]-1):
+                if inputobj.isamp:
+                    c = np.median(inputobj.data[i+1][:]/inputobj.data[i][:])
+                    inputobj.data[i][:] = inputobj.data[i][:]/c
+                else:
+                    c = np.median(inputobj.data[i+1][:]-inputobj.data[i][:])
+                    inputobj.data[i][:] = inputobj.data[i][:]-c
