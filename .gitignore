@@ -1,8 +1,3 @@
-# zip and rar files #
-#####################
-*.zip
-*.rar
-
 # misc files #
 ##############
 test_info_read.ipynb
