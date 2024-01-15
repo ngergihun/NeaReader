@@ -165,8 +165,9 @@ def RotatePhase(inputobj: NeaImage, degree: float):
         ampIm.parameters = inputobj.parameters
 
         # Complex map
-        C = cmath.rect(ampIm.data, inputobj.data + math.radians(degree))
-        outputobj.data = cmath.phase(C)
+        C = ampIm.data * np.exp(inputobj.data*complex(1j))
+        # Rotate and extract phase
+        outputobj.data = np.angle(C*np.exp(np.deg2rad(degree)*complex(1j)))
 
     return outputobj
 
@@ -186,4 +187,19 @@ def SelfReferencing(inputobj: NeaImage, order: int):
     else:
         outputobj.data = inputobj.data-outputobj.data
 
+    return outputobj
+
+def SimpleNormalize(inputobj: NeaImage, mtype: str, value = 1):
+    outputobj = copy.deepcopy(inputobj)
+    match mtype:
+        case 'median':
+            if inputobj.isAmplitude():
+                outputobj.data = inputobj.data / np.median(inputobj.data)
+            else:
+                outputobj.data = inputobj.data - np.median(inputobj.data)
+        case 'manual':
+            if inputobj.isAmplitude():
+                outputobj.data = inputobj.data / value
+            else:
+                outputobj.data = inputobj.data - value
     return outputobj
