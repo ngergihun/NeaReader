@@ -1,7 +1,6 @@
 import gwyfile
 import numpy as np
 import copy
-import math, cmath
 
 class NeaImage:
     def __init__(self) -> None:
