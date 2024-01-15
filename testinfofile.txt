@@ -1,29 +1,27 @@
 # www.neaspec.com
 # Scan:	 	2D (PsHet)
-# Project:	 	2023.06.27. Nadia
-# Description:	 	
-# Date:	 	11/10/2023 11:04:44
-# Scanner Center Position (X, Y):	[µm]	48.28	45.40	 
-# Rotation:	[°]	0	 	 
-# Scan Area (X, Y, Z):	[µm]	10.000	10.000	0.000
-# Pixel Area (X, Y, Z):	[px]	100	100	1
+# Project:	 	MihalyJudith_EVs
+# Description:	 	PLT-EV-niceplace_spectrum_1665_cm-1
+# Date:	 	04/09/2022 12:38:28
+# Scanner Center Position (X, Y):	[µm]	49.89	49.75	 
+# Rotation:	[°]	+90	 	 
+# Scan Area (X, Y, Z):	[µm]	5.000	5.000	0.000
+# Pixel Area (X, Y, Z):	[px]	200	200	1
 # Averaging:	 	1	 	 
 # Integration time:	[ms]	7	 	 
-# Laser Source:	 	Tunable MIR laser (QCL)
+# Laser Source:	 	
 # Detector:	 	MIR
-# Target Wavelength:	[cm]	1,130.000	 	 
+# Target Wavelength:	[µm]	6.006	 	 
 # Demodulation Mode:	 	PsHet
-# Tip Frequency:	[Hz]	258,919.328	 	 
-# Tip Amplitude:	[mV]	70.000	 	 
-# Tapping Amplitude:	[nm]	106.205	 	 
-# Modulation Frequency:	[Hz]	302.513	 	 
-# Modulation Amplitude:	[mV]	65,464.973	 	 
-# Modulation Offset:	[mV]	0.000	 	 
-# Setpoint:	[%]	79.74	 	 
-# Regulator (P, I, D):	 	2.625196	4.057867	1.000000
+# Tip Frequency:	[Hz]	267,576.267	 	 
+# Tip Amplitude:	[mV]	650.000	 	 
+# Tapping Amplitude:	[nm]	83.836	 	 
+# Modulation Frequency:	[Hz]	304.064	 	 
+# Modulation Amplitude:	[mV]	47,398.407	 	 
+# Modulation Offset:	[mV]	2,605.995	 	 
+# Setpoint:	[%]	80.00	 	 
+# Regulator (P, I, D):	 	4.975674	10.480219	1.000000
 # Tip Potential:	[mV]	0.000	 	 
-# M1A Scaling:	[nm/V]	1.520	 	 
-# M1A Cantilever Factor:	 	1.000	 	 
-# Q-Factor:	 	493.9	 	 
-# Measurement Mode:	 	Self-Reference Off	 	 
-# Version:	 	2.2.10875.0
+# M1A Scaling:	[nm/V]	7.502	 	 
+# Q-Factor:	 	676.4	 	 
+# Version:	 	1.10.8956.0

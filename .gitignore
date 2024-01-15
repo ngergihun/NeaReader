@@ -1,13 +1,7 @@
-# Images #
-##########
-
 # zip and rar files #
 #####################
 *.zip
 *.rar
-
-# test notebooks #
-##################
 
 # misc files #
 ##############
