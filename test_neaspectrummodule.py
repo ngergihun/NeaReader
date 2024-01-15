@@ -5,7 +5,7 @@ import numpy as np
 # Choose a measurement file
 import os
 current_folder = os.getcwd()
-file_name = os.path.join(current_folder,'pte1.txt')
+file_name = os.path.join(current_folder,'pte_spectrum.txt')
 
 # Create NeaSpectrom object and load data
 s = neas.NeaSpectrum()
