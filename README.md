@@ -34,7 +34,7 @@ The NeaImager.py file implements the base class for imaging measurements (PsHet,
 import NeaImager as neaim
 channelname = 'O3P raw'
 m = neaim.NeaImage()
-m.read_from_gwyfile(meas_path,channelname)
+m.read_from_gwyfile(meas_file_path,channelname)
 ```
 The `data` attribute contains the measured image as a 2d numpy array. The most basic measurement parameters related to the image are also read from the `.gwy` file. They are `xreal`,`yreal` - real, physical lengths of the corresponding axes, `xoff`,`yoff` - x and y offset of the middlepoint of teh corresponding axes (this is the scanner centor position basically), `xres`,`yres` - number of pixels along each axes. You can use these to plot the data with the physically correct axes. Example:
 ```python
