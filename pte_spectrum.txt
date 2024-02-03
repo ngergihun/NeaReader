@@ -1,6 +1,6 @@
 # www.neaspec.com
 # Scan:	 	Pointspectroscopy PTE+
-# Project:	 	2023.12.05. Slobodan
+# Project:	 	2023.12.05.
 # Description:	 	PTE sample 26 nano line scan 2
 # Date:	 	12/10/2023 12:40:18
 # Scanner Center Position (X, Y):	[µm]	48.34	51.30	 
