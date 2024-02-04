@@ -39,6 +39,8 @@ class NeaImage:
     def isAmplitude(self):
         if 'A' in self.channel_name:
             self.isamp = True
+            self.isphase = False
+            self.istopo = False
         else:
             self.isamp = False
             if 'Z' in self.channel_name:
