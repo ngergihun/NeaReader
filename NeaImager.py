@@ -15,6 +15,8 @@ class NeaImage:
         self.xres = None
         self.yres = None
         self.isamp  = None # Amplitude -True or phase/topography - false - VERY IMPORTANT
+        self.istopo = None
+        self.isphase = None
         # Data/Image itself
         self.data = None
         # Other parameters from info txt -  Dictionary
@@ -28,7 +30,7 @@ class NeaImage:
         channel = channels[self.channel_name]
         self.isAmplitude()
 
-        # Set a basic attributes from gwyddion field
+        # Set the basic attributes from gwyddion field
         for key in channel:
             if key in dir(self):
                 setattr(self,key,channel[key])
@@ -39,6 +41,12 @@ class NeaImage:
             self.isamp = True
         else:
             self.isamp = False
+            if 'Z' in self.channel_name:
+                self.istopo = True
+                self.isphase = False
+            else:
+                self.istopo = False
+                self.isphase = True
 
     def read_info_file(self,filename):
         # reader tested for neascan version 2.1.10719.0
