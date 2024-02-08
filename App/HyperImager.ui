@@ -7,15 +7,29 @@
     <x>0</x>
     <y>0</y>
     <width>1126</width>
-    <height>576</height>
+    <height>688</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
+   <string notr="true">QWidget#centralwidget {
+  background-color: rgb(209, 229, 255);
+}
+QWidget {
   background-color: #fff;
+}
+QWidget#RightMenuContainer,
+QWidget#LeftMenuContainer,
+QWidget#MainPlotArea {
+  border-radius: 8px;
 }
 /*QSPINBOX-----------------------------------------------------------------------*/
 QSpinBox,
@@ -53,7 +67,9 @@ QLabel#bgDegreeYLabel {
   background-color: #fff;
 }
 
-QLabel#phaseRotLabel {
+QLabel#phaseRotLabel, 
+QLabel#selfRefOrderLabel,
+QLabel#lineLevelLabel {
   color: #0f1925;
   font-size: 14px;
   background-color: #fff;
@@ -80,7 +96,7 @@ QPushButton:hover{
   border: 2px solid #9ac3fe;
 }
 QPushButton#prevButton,
-QPushButton#nextButton{
+QPushButton#nextButton {
   background-color: rgb(53, 94, 88);
   border: 1px solid rgb(53, 94, 88);
 }
@@ -96,7 +112,7 @@ QComboBox {
     min-width: 6em;
 }
 QGroupBox {
-    border: 1px solid gray;
+    border: 2px solid gray;
     border-color: #FF17365D;
     margin-top: 10px;
     font-size: 12px;
@@ -116,7 +132,7 @@ QLabel {
   border-radius: 8px;
 }
 QTreeWidget {
-  border: 1px solid gray;
+  border: 2px solid gray;
   padding: 5px;
   border-radius: 8px;
   border-color: rgb(65, 152, 176);
@@ -131,6 +147,9 @@ QFrame#level_toolsFrame {
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>9</number>
+    </property>
     <property name="leftMargin">
      <number>9</number>
     </property>
@@ -159,16 +178,16 @@ QFrame#level_toolsFrame {
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <property name="leftMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="topMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="rightMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="bottomMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <item>
         <widget class="QFrame" name="LoadFrame">
@@ -291,11 +310,14 @@ QFrame#level_toolsFrame {
        </sizepolicy>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="spacing">
+        <number>9</number>
+       </property>
        <property name="topMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="bottomMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <item>
         <widget class="QWidget" name="headerContainer" native="true">
@@ -355,13 +377,13 @@ QFrame#level_toolsFrame {
         <number>6</number>
        </property>
        <property name="leftMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="topMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="rightMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="bottomMargin">
         <number>9</number>
@@ -509,8 +531,8 @@ QFrame#level_toolsFrame {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>224</width>
-               <height>69</height>
+               <width>194</width>
+               <height>60</height>
               </rect>
              </property>
              <property name="sizePolicy">
@@ -528,24 +550,66 @@ QFrame#level_toolsFrame {
              <attribute name="label">
               <string>Line Levelling</string>
              </attribute>
-             <widget class="QComboBox" name="linelevelComboBox">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>0</y>
-                <width>201</width>
-                <height>31</height>
-               </rect>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <property name="leftMargin">
+               <number>0</number>
               </property>
-             </widget>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QFrame" name="lineLevelFrame">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_9">
+                 <property name="spacing">
+                  <number>6</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>9</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>9</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>9</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>9</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="lineLevelLabel">
+                   <property name="text">
+                    <string>Method</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="linelevelComboBox">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
             </widget>
             <widget class="QWidget" name="background_page">
              <property name="geometry">
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>224</width>
-               <height>69</height>
+               <width>112</width>
+               <height>43</height>
               </rect>
              </property>
              <property name="sizePolicy">
@@ -574,7 +638,7 @@ QFrame#level_toolsFrame {
                <number>0</number>
               </property>
               <item>
-               <widget class="QFrame" name="frame_3">
+               <widget class="QFrame" name="bgLabelFrame">
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
                 </property>
@@ -671,14 +735,20 @@ QFrame#level_toolsFrame {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>224</width>
-               <height>69</height>
+               <width>98</width>
+               <height>40</height>
               </rect>
              </property>
              <attribute name="label">
               <string>Phase Rotation</string>
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout_7">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
               <item>
                <widget class="QFrame" name="frame_4">
                 <property name="frameShape">
@@ -727,30 +797,57 @@ QFrame#level_toolsFrame {
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>224</width>
-               <height>69</height>
+               <width>181</width>
+               <height>60</height>
               </rect>
              </property>
              <attribute name="label">
               <string>Self-referencing</string>
              </attribute>
-             <widget class="QComboBox" name="selfRefcomboBox">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>0</y>
-                <width>201</width>
-                <height>31</height>
-               </rect>
+             <layout class="QVBoxLayout" name="verticalLayout_8">
+              <property name="leftMargin">
+               <number>0</number>
               </property>
-             </widget>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QFrame" name="selfRefFrame">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_8">
+                 <item>
+                  <widget class="QLabel" name="selfRefOrderLabel">
+                   <property name="text">
+                    <string>Order</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="selfRefcomboBox">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
             </widget>
             <widget class="QWidget" name="simplenorm_page">
              <property name="geometry">
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>224</width>
+               <width>204</width>
                <height>69</height>
               </rect>
              </property>
