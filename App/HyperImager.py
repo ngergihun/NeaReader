@@ -29,6 +29,7 @@ class MainWindow(uiclass, baseclass):
         self.nextButton.setText("\U0001F87A")
         self.prevButton.setText("\U0001F878")
         self.linelevelComboBox.addItems(['Mean','Median','Median of differences'])
+        self.selfRefcomboBox.addItems(['1','2','3','4','5'])
         # setup stylesheet
         # apply_stylesheet(app, theme='light_blue.xml', invert_secondary=True)
 
@@ -42,10 +43,7 @@ class MainWindow(uiclass, baseclass):
         self.openfile.clicked.connect(self.choose_file)
         self.loadchannel.clicked.connect(self.load_meas)
         self.load_info.clicked.connect(self.choose_info_file)
-        self.nextButton.clicked.connect(self.nextCorrectionPage)
-        self.prevButton.clicked.connect(self.prevCorrectionPage)
-        self.applyLineLevel.clicked.connect(self.levelTheLines)
-        self.applyBgFit.clicked.connect(self.fitTheBackground)
+        self.ApplyCorrectionButton.clicked.connect(self.ApplySingleCorrection)
 
         # Create default plot
         testdata = np.fromfunction(lambda i, j: (1+0.3*np.sin(i)) * (i)**2 + (j)**2, (100, 100))
@@ -111,6 +109,18 @@ class MainWindow(uiclass, baseclass):
         self.cbar.setColorMap(pg.colormap.get(self.colorMapName))
         self.cbar.setLevels(values = (np.min(m.data),np.max(m.data)))
 
+    def ApplySingleCorrection(self):
+         methodidx = self.correctionsToolBox.currentIndex()
+         match methodidx:
+            case 0:
+                self.levelTheLines()
+            case 1:
+                self.fitTheBackground()
+            case 2:
+                self.rotateThePhase()
+            case 3:
+                self.selfReferencing()
+
     def levelTheLines(self):
         choosen_type = self.linelevelComboBox.currentText()
         match choosen_type:
@@ -129,6 +139,18 @@ class MainWindow(uiclass, baseclass):
         ydegree = self.bgDegreeYspinBox.value()
         m_bg,f_bg = neaim.BackgroundPolyFit(inputobj = self.correctedMeasList[-1], xorder=xdegree, yorder=ydegree)
         self.correctedMeasList.append(m_bg)
+        self.update_image(self.correctedMeasList[-1])
+
+    def rotateThePhase(self):
+        alpha = self.phaseRotSpinBox.value()
+        m_rot = neaim.RotatePhase(inputobj = self.correctedMeasList[-1], degree = alpha)
+        self.correctedMeasList.append(m_rot)
+        self.update_image(self.correctedMeasList[-1])
+
+    def selfReferencing(self):
+        order = int(self.selfRefcomboBox.currentText())
+        m_ref = neaim.SelfReferencing(inputobj = self.correctedMeasList[-1], order = order)
+        self.correctedMeasList.append(m_ref)
         self.update_image(self.correctedMeasList[-1])
 
     # UI function staff
