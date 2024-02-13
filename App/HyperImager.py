@@ -19,6 +19,7 @@ class MainWindow(uiclass, baseclass):
         super().__init__()
         # Load UI
         self.setupUi(self)
+        self.plotMenuContainer.setHidden(True)
         # Add other UI elements
         self.channelcombobox.addItems(['O0A raw', 'O0P raw', 'O1A raw', 'O1P raw', 'O2A raw', 'O2P raw', 'O3A raw', 'O3P raw',
                              'O4A raw', 'O4P raw', 'O5A raw', 'O5P raw', 'Z raw', 'Z C', 'M0A raw', 'M0P raw',
@@ -30,6 +31,7 @@ class MainWindow(uiclass, baseclass):
         self.prevButton.setText("\U0001F878")
         self.linelevelComboBox.addItems(['Mean','Median','Median of differences'])
         self.selfRefcomboBox.addItems(['1','2','3','4','5'])
+        self.colorbarcomboBox.addItems(['gray','fire','inferno','CET-D1','CET-D1A','CET-D3'])
         # setup stylesheet
         # apply_stylesheet(app, theme='light_blue.xml', invert_secondary=True)
 
