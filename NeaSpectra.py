@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 class NeaSpectrum:
     def __init__(self) -> None:
@@ -72,12 +73,17 @@ class NeaSpectrum:
         for i in range(len(channels)-2):
             if params['PixelArea'][1] and params['PixelArea'][0] == 1:
                 if "PTE+" in params['Scan']:
-                    data[channels[i]] = np.reshape(C_data[:,i], (params['PixelArea'][2], params['PixelArea'][0]))
+                    data[channels[i]] = np.reshape(C_data[:,i], (params['PixelArea'][2]))
                 else:
-                    data[channels[i]] = np.reshape(C_data[:,i], (params['PixelArea'][2]*2, params['PixelArea'][0]))
+                    data[channels[i]] = np.reshape(C_data[:,i], (params['PixelArea'][2]*2))
             else:
                 if "PTE+" in params['Scan']:
                     data[channels[i]] = np.reshape(C_data[:,i], (params['PixelArea'][0], params['PixelArea'][1], params['PixelArea'][2]))
                 else:
                     data[channels[i]] = np.reshape(C_data[:,i], (params['PixelArea'][0], params['PixelArea'][1], params['PixelArea'][2]*2))
         self.data = data
+
+    def SaveSpectraToDAT(self,channelname):
+        fname = f'{self.filename[0:-4]}.dat'
+        M = np.array([self.data["Wavenumber"],self.data[channelname]])
+        np.savetxt(fname, M.T)

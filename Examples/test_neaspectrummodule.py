@@ -25,3 +25,6 @@ print(s.parameters["Scan"])
 print(np.shape(s.data["PTE"]))
 plt.plot(s.data["Wavenumber"][0,0,:], s.data["PTE"][0,0,:])
 plt.show()
+
+# To save a specific data channel: (this will save the wavenumber and the choosen channel to a dat file columnwise)
+s.SaveSpectraToDAT("O2A")
