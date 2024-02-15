@@ -28,7 +28,7 @@ The `SaveSpectraToDAT()` method of the class enables you to save the spectrum re
 ```python
 s.SaveSpectraToDAT("O2P")
 ```
-You will get a file with two columns. The first is the wavenumber and the second is the O2P spectrum.
+You will get a file with two columns. The first is the wavenumber and the second is the O2P spectrum. The file will have the same name as the original file with '.dat' extension in the same location where the original file is.
 
 # NeaImage class
 
