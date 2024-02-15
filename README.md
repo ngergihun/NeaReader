@@ -22,7 +22,13 @@ s.data["Wavenumber"][0,0,:]
 s.data["PTE"][0,0,:]
 s.data["O3P"][0,0,:]
 ```
-In case of hyperspectral measurement (linescan or areascan) the data channels are 3D numpy arrays, while in case of single spectra it is a simple numpy array with only one index.
+In the case of hyperspectral measurement (linescan or areascan) the data channels are 3D numpy arrays, while in case of single spectra it is a simple numpy array with only one index.
+
+The `SaveSpectraToDAT()` method of the class enables you to save the spectrum recorded to a specific data channel. For example, to save/write the O2P spectrum into a .dat file, you can call:
+```python
+s.SaveSpectraToDAT("O2P")
+```
+You will get a file with two columns. The first is the wavenumber and the second is the O2P spectrum.
 
 # NeaImage class
 
