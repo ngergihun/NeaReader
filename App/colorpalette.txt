@@ -1,0 +1,13 @@
+Chrome light mode colors:
+
+Button text - toggled: #1967d5
+Button text - untoggled: #202124
+Button toggled: #e8f0fe
+Button hover: #e8eaed
+icon color disabled: #5f6368
+icon color enabled: #1a73e8
+
+Upper section general color: #e8eaed
+URL bar: #eceff7
+URL bar toggled linecolor: #0b57d0
+Tab hover: #a8c7fa

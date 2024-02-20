@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1283</width>
-    <height>688</height>
+    <width>1278</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -185,6 +185,12 @@ QFrame#level_toolsFrame {
        <property name="spacing">
         <number>9</number>
        </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QWidget" name="LeftMenu" native="true">
          <property name="sizePolicy">
@@ -198,6 +204,28 @@ QFrame#level_toolsFrame {
            <width>0</width>
            <height>0</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+  background-color: #fff;
+  color: #000000;
+  font-weight: 600;
+  border-radius: 8px;
+  border-bottom-left-radius: 0 px;
+  border-top-left-radius: 0 px;
+  border: 0 px solid #000000;
+  padding: 5px 5px;
+  margin-top: 0px;
+  outline: 0px;
+}
+
+QPushButton:hover {
+background-color: #e8eaed;
+}
+
+QPushButton:checked {
+  background-color: #e8f0fe;
+}</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_13">
           <property name="spacing">
@@ -216,7 +244,7 @@ QFrame#level_toolsFrame {
            <number>0</number>
           </property>
           <item>
-           <widget class="QPushButton" name="pushButton_5">
+           <widget class="QPushButton" name="sidebarleftButton">
             <property name="minimumSize">
              <size>
               <width>50</width>
@@ -230,9 +258,59 @@ QFrame#level_toolsFrame {
              </size>
             </property>
             <property name="text">
-             <string>PushButton</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="main_icons.qrc">
+              <normaloff>:/leftmenu_icons/icons/sideleft_gray.svg</normaloff>
+              <normalon>:/leftmenu_icons/icons/sideleft_blue_duo.svg</normalon>:/leftmenu_icons/icons/sideleft_gray.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>26</width>
+              <height>26</height>
+             </size>
             </property>
             <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="fileButton">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="main_icons.qrc">
+              <normaloff>:/leftmenu_icons/icons/file_gray.svg</normaloff>
+              <normalon>:/leftmenu_icons/icons/file_blue_duo.svg</normalon>:/leftmenu_icons/icons/file_gray.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>26</width>
+              <height>26</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
              <bool>true</bool>
             </property>
             <property name="autoExclusive">
@@ -241,7 +319,7 @@ QFrame#level_toolsFrame {
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_6">
+           <widget class="QPushButton" name="saveButton">
             <property name="minimumSize">
              <size>
               <width>50</width>
@@ -255,31 +333,35 @@ QFrame#level_toolsFrame {
              </size>
             </property>
             <property name="text">
-             <string>PushButton</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="main_icons.qrc">
+              <normaloff>:/leftmenu_icons/icons/floppy_gray.svg</normaloff>
+              <normalon>:/leftmenu_icons/icons/floppy_blue_duo.svg</normalon>:/leftmenu_icons/icons/floppy_gray.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>26</width>
+              <height>26</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoRepeat">
+             <bool>false</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_7">
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>50</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_3">
+           <spacer name="leftsidebarVerticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -308,7 +390,10 @@ QFrame#level_toolsFrame {
            <height>0</height>
           </size>
          </property>
-         <widget class="QWidget" name="LeftMenuStackPage1" native="true">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="LeftMenuStackPageFile">
           <layout class="QVBoxLayout" name="verticalLayout">
            <property name="spacing">
             <number>9</number>
@@ -320,7 +405,7 @@ QFrame#level_toolsFrame {
             <number>0</number>
            </property>
            <property name="rightMargin">
-            <number>0</number>
+            <number>9</number>
            </property>
            <property name="bottomMargin">
             <number>0</number>
@@ -445,6 +530,82 @@ QFrame#level_toolsFrame {
               </property>
              </column>
             </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="LeftMenuStackPageFile_2">
+          <layout class="QVBoxLayout" name="verticalLayout_15">
+           <item>
+            <widget class="QFrame" name="frame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_14">
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_7">
+                <property name="text">
+                 <string>PushButton</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_8">
+                <property name="text">
+                 <string>PushButton</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_2">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_13">
+              <item>
+               <widget class="QPushButton" name="pushButton_5">
+                <property name="text">
+                 <string>PushButton</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_6">
+                <property name="text">
+                 <string>PushButton</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -687,10 +848,10 @@ QFrame#level_toolsFrame {
         <number>9</number>
        </property>
        <property name="leftMargin">
-        <number>9</number>
+        <number>0</number>
        </property>
        <property name="rightMargin">
-        <number>9</number>
+        <number>0</number>
        </property>
        <item>
         <widget class="QStackedWidget" name="RightMenuStack">
@@ -706,13 +867,13 @@ QFrame#level_toolsFrame {
            <height>0</height>
           </size>
          </property>
-         <widget class="QWidget" name="RightMenuStackPage1" native="true">
+         <widget class="QWidget" name="RightMenuStackPage1">
           <layout class="QVBoxLayout" name="verticalLayout_6">
            <property name="spacing">
             <number>6</number>
            </property>
            <property name="leftMargin">
-            <number>0</number>
+            <number>9</number>
            </property>
            <property name="topMargin">
             <number>0</number>
@@ -866,7 +1027,7 @@ QFrame#level_toolsFrame {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>230</width>
+                   <width>221</width>
                    <height>69</height>
                   </rect>
                  </property>
@@ -943,7 +1104,7 @@ QFrame#level_toolsFrame {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>230</width>
+                   <width>221</width>
                    <height>69</height>
                   </rect>
                  </property>
@@ -1070,7 +1231,7 @@ QFrame#level_toolsFrame {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>230</width>
+                   <width>221</width>
                    <height>69</height>
                   </rect>
                  </property>
@@ -1132,7 +1293,7 @@ QFrame#level_toolsFrame {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>230</width>
+                   <width>221</width>
                    <height>69</height>
                   </rect>
                  </property>
@@ -1182,7 +1343,7 @@ QFrame#level_toolsFrame {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>230</width>
+                   <width>221</width>
                    <height>69</height>
                   </rect>
                  </property>
@@ -1248,6 +1409,28 @@ QFrame#level_toolsFrame {
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+  background-color: #fff;
+  color: #000000;
+  font-weight: 600;
+  border-radius: 8px;
+  border-bottom-right-radius: 0 px;
+  border-top-right-radius: 0 px;
+  border: 0 px solid #000000;
+  padding: 5px 5px;
+  margin-top: 0px;
+  outline: 0px;
+}
+
+QPushButton:hover {
+background-color: #e8eaed;
+}
+
+QPushButton:checked {
+  background-color: #e8f0fe;
+}</string>
+         </property>
          <layout class="QVBoxLayout" name="verticalLayout_11">
           <property name="leftMargin">
            <number>0</number>
@@ -1262,7 +1445,7 @@ QFrame#level_toolsFrame {
            <number>0</number>
           </property>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="sidebarrightButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -1282,63 +1465,27 @@ QFrame#level_toolsFrame {
              </size>
             </property>
             <property name="text">
-             <string>PushButton</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="main_icons.qrc">
+              <normaloff>:/leftmenu_icons/icons/sideright_gray.svg</normaloff>
+              <normalon>:/leftmenu_icons/icons/sideright_blue_duo.svg</normalon>:/leftmenu_icons/icons/sideright_gray.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>26</width>
+              <height>26</height>
+             </size>
             </property>
             <property name="checkable">
              <bool>true</bool>
             </property>
-            <property name="autoExclusive">
+            <property name="checked">
              <bool>true</bool>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_3">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>50</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_4">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>50</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>PushButton</string>
+            <property name="autoExclusive">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -1373,7 +1520,9 @@ QFrame#level_toolsFrame {
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="main_icons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>pushButton</sender>
@@ -1392,26 +1541,10 @@ QFrame#level_toolsFrame {
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_5</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>LeftMenuStack</receiver>
-   <slot>setHidden(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>35</x>
-     <y>48</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>204</x>
-     <y>333</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_2</sender>
+   <sender>sidebarrightButton</sender>
    <signal>toggled(bool)</signal>
    <receiver>RightMenuStack</receiver>
-   <slot>setHidden(bool)</slot>
+   <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>1243</x>
@@ -1420,6 +1553,22 @@ QFrame#level_toolsFrame {
     <hint type="destinationlabel">
      <x>1080</x>
      <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sidebarleftButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>LeftMenuStack</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>43</x>
+     <y>46</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>71</x>
+     <y>115</y>
     </hint>
    </hints>
   </connection>

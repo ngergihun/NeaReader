@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="leftmenu_icons">
+    <file>icons/sideright_blue.svg</file>
+    <file>icons/sideright_blue_duo.svg</file>
+    <file>icons/sideright_gray.svg</file>
+    <file>icons/sideleft_gray.svg</file>
+    <file>icons/sideleft_blue.svg</file>
+    <file>icons/sideleft_blue_duo.svg</file>
+    <file>icons/floppy_blue_duo.svg</file>
+    <file>icons/file_blue_duo.svg</file>
+    <file>icons/file_blue.svg</file>
+    <file>icons/floppy_blue.svg</file>
+    <file>icons/floppy_gray.svg</file>
+    <file>icons/file_gray.svg</file>
+    <file>icons/file_black.svg</file>
+  </qresource>
+</RCC>

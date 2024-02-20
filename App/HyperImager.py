@@ -46,6 +46,8 @@ class MainWindow(uiclass, baseclass):
         self.loadchannel.clicked.connect(self.load_meas)
         self.load_info.clicked.connect(self.choose_info_file)
         self.ApplyCorrectionButton.clicked.connect(self.ApplySingleCorrection)
+        self.fileButton.toggled.connect(lambda: self.LeftMenuStack.setCurrentIndex(0))
+        self.saveButton.toggled.connect(lambda: self.LeftMenuStack.setCurrentIndex(1))
 
         # Create default plot
         testdata = np.fromfunction(lambda i, j: (1+0.3*np.sin(i)) * (i)**2 + (j)**2, (100, 100))
