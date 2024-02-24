@@ -26,12 +26,7 @@
 QWidget {
   background-color: #fff;
 }
-QWidget#plotMenuContainer {
-    border: 2px solid gray;
-  padding: 5px;
-  border-radius: 8px;
-  border-color: rgb(65, 152, 176);
-}
+
 QWidget#RightMenuContainer,
 QWidget#LeftMenuContainer,
 QWidget#MainPlotArea {
@@ -643,11 +638,37 @@ QPushButton:checked {
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>40</height>
+           <height>50</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+  background-color: #fff;
+  color: #000000;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 0 px solid #000000;
+  padding: 5px 5px;
+  margin-top: 0px;
+  outline: 0px;
+}
+
+QPushButton:hover {
+background-color: #e8eaed;
+}
+
+QPushButton:checked {
+  background-color: #e8f0fe;
+}</string>
+         </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
           <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
            <number>0</number>
           </property>
           <property name="bottomMargin">
@@ -656,14 +677,37 @@ QPushButton:checked {
           <item>
            <widget class="QLabel" name="headerLabel">
             <property name="text">
-             <string>PlotAreaHeader</string>
+             <string>    Plot settings</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="plotsettingsButton">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
             <property name="text">
-             <string>Something to push</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="main_icons.qrc">
+              <normaloff>:/leftmenu_icons/icons/vslider_gray.svg</normaloff>
+              <normalon>:/leftmenu_icons/icons/vslider_blue_duo.svg</normalon>:/leftmenu_icons/icons/vslider_gray.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>36</width>
+              <height>36</height>
+             </size>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -686,6 +730,39 @@ QPushButton:checked {
            <horstretch>0</horstretch>
            <verstretch>3</verstretch>
           </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget {
+  background-color: rgb(215, 244, 252);
+}
+QWidget#plotMenuContainer {
+  border: 2px solid rgb(65, 152, 176);
+  padding: 5px;
+  border-radius: 8px;
+}
+
+QComboBox,
+QDoubleSpinBox {
+ background-color: #ffffff;
+}
+
+QPushButton {
+  background-color: #0d6efd;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #0d6efd;
+  padding: 5px 5px;
+  margin-top: 0px;
+  outline: 0px;
+}
+QPushButton:hover{
+  background-color: #0b5ed7;
+  border: 2px solid #9ac3fe;
+}
+QPushButton:checked{
+  background-color: #0b5ed7;
+}</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_11">
           <item>
@@ -780,19 +857,50 @@ QPushButton:checked {
              <item>
               <layout class="QHBoxLayout" name="minmaxSpinlayout">
                <item>
-                <widget class="QDoubleSpinBox" name="minCb"/>
+                <widget class="QDoubleSpinBox" name="minCb">
+                 <property name="minimum">
+                  <double>-1000000000000.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>1000000000000.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>0.000000000000000</double>
+                 </property>
+                </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="maxCb"/>
+                <widget class="QDoubleSpinBox" name="maxCb">
+                 <property name="minimum">
+                  <double>-999999999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999999999.000000000000000</double>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
              <item>
-              <widget class="QCheckBox" name="cBcheckBox">
-               <property name="text">
-                <string>Fixed</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <widget class="QCheckBox" name="cBcheckBox">
+                 <property name="text">
+                  <string>Auto</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="resetcolorbarButton">
+                 <property name="text">
+                  <string>Reset</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -1525,7 +1633,7 @@ QPushButton:checked {
  </resources>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>plotsettingsButton</sender>
    <signal>toggled(bool)</signal>
    <receiver>plotMenuContainer</receiver>
    <slot>setVisible(bool)</slot>
