@@ -896,7 +896,7 @@ QPushButton:checked{
                <item>
                 <widget class="QPushButton" name="resetcolorbarButton">
                  <property name="text">
-                  <string>Reset</string>
+                  <string>Set</string>
                  </property>
                 </widget>
                </item>
@@ -1212,8 +1212,8 @@ QPushButton:checked{
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>221</width>
-                   <height>69</height>
+                   <width>115</width>
+                   <height>43</height>
                   </rect>
                  </property>
                  <property name="sizePolicy">
@@ -1339,8 +1339,8 @@ QPushButton:checked{
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>221</width>
-                   <height>69</height>
+                   <width>95</width>
+                   <height>40</height>
                   </rect>
                  </property>
                  <attribute name="label">
@@ -1401,8 +1401,8 @@ QPushButton:checked{
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>221</width>
-                   <height>69</height>
+                   <width>182</width>
+                   <height>60</height>
                   </rect>
                  </property>
                  <attribute name="label">
@@ -1451,8 +1451,8 @@ QPushButton:checked{
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>221</width>
-                   <height>69</height>
+                   <width>100</width>
+                   <height>30</height>
                   </rect>
                  </property>
                  <attribute name="label">

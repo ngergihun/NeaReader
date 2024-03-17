@@ -115,7 +115,6 @@ class MainWindow(uiclass, baseclass):
         self.imItem.setImage(image = m.data)
         self.cbar.setColorMap(pg.colormap.get(self.colorMapName))
         if not self.cBcheckBox.isChecked():
-            print("not checked")
             self.cbar.setLevels(values = (self.minCb.value(),self.maxCb.value()))
         else:
             self.cbar.setLevels(values = (np.min(m.data),np.max(m.data)))

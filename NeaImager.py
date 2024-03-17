@@ -155,11 +155,8 @@ def BackgroundPolyFit(inputobj: NeaImage, xorder: int, yorder: int):
 
     if inputobj.isamp:
         outputobj.data = Z/background
-        print('divide')
     else:
         outputobj.data = Z-background
-        print('subtract')
-    print(outputobj.isamp)
 
     return outputobj, background
 
