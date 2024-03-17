@@ -155,8 +155,11 @@ def BackgroundPolyFit(inputobj: NeaImage, xorder: int, yorder: int):
 
     if inputobj.isamp:
         outputobj.data = Z/background
+        print('divide')
     else:
         outputobj.data = Z-background
+        print('subtract')
+    print(outputobj.isamp)
 
     return outputobj, background
 
@@ -168,8 +171,8 @@ def RotatePhase(inputobj: NeaImage, degree: float):
         pass
     else:
         ampIm = NeaImage()
-        channelname = inputobj.channel_name
-        new_channelname = channelname.replace('P','A')
+        new_channelname = inputobj.channel_name
+        new_channelname = new_channelname.replace('P','A')
         ampIm.read_from_gwyfile(inputobj.filename,new_channelname)
         ampIm.parameters = inputobj.parameters
 
@@ -181,20 +184,24 @@ def RotatePhase(inputobj: NeaImage, degree: float):
     return outputobj
 
 def SelfReferencing(inputobj: NeaImage, order: int):
-    # Load amplitude image
-    outputobj = NeaImage()
-    if inputobj.isAmplitude():
+    outputobj = copy.deepcopy(inputobj)
+    # Load the other harmonic
+    referenceobj = NeaImage()
+    if inputobj.isamp:
         channelname = f'O{order}A raw'
-    else:
+    elif inputobj.isphase:
         channelname = f'O{order}P raw'
-
-    outputobj.read_from_gwyfile(inputobj.filename,channelname)
-    outputobj.parameters = inputobj.parameters
-
-    if inputobj.isAmplitude():
-        outputobj.data = np.divide(inputobj.data,outputobj.data)
     else:
-        outputobj.data = inputobj.data-outputobj.data
+        pass
+    referenceobj.read_from_gwyfile(inputobj.filename,channelname)
+    referenceobj.parameters = inputobj.parameters
+
+    if inputobj.isamp:
+        outputobj.data = np.divide(inputobj.data,referenceobj.data)
+    elif inputobj.isphase:
+        outputobj.data = inputobj.data-referenceobj.data
+    else:
+        pass
 
     return outputobj
 
@@ -212,3 +219,23 @@ def SimpleNormalize(inputobj: NeaImage, mtype: str, value = 1):
             else:
                 outputobj.data = inputobj.data - value
     return outputobj
+
+def CalcCrossSectionRect(Rect1,Rect2):
+    x1 = Rect1(1) 
+    x2 = Rect2(1) 
+    y1 = Rect1(2) 
+    y2 = Rect2(2)
+    W1 = Rect1(3) 
+    W2 = Rect2(3) 
+    H1 = Rect1(4)
+    H2 = Rect2(4)
+
+    if y2 > y1: #Positive shift
+        Hn = H1-(y2-y1)
+        yn = y2
+    elif y2 < y1 and y1+H1>y2+H2: #Negative shift and higher than H2
+        Hn = H2+(y2-y1)
+        yn = y1
+    else:
+        Hn = H1
+        yn = y1
