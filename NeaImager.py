@@ -7,6 +7,7 @@ class NeaImage:
         # Name regarding file and neaSCAN project
         self.filename = None # Full path with name
         self.channel_name = None
+        self.meas_name = None
         # Important measurement parameters from gwyddion file
         self.xreal = None
         self.yreal = None
@@ -164,7 +165,7 @@ def RotatePhase(inputobj: NeaImage, degree: float):
     outputobj = copy.deepcopy(inputobj)
 
     # Load amplitude image
-    if inputobj.isAmplitude():
+    if inputobj.isamp:
         pass
     else:
         ampIm = NeaImage()

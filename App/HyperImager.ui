@@ -663,7 +663,7 @@ QPushButton:checked {
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <property name="leftMargin">
-           <number>0</number>
+           <number>9</number>
           </property>
           <property name="topMargin">
            <number>0</number>
@@ -677,7 +677,7 @@ QPushButton:checked {
           <item>
            <widget class="QLabel" name="headerLabel">
             <property name="text">
-             <string>    Plot settings</string>
+             <string>Plot settings</string>
             </property>
            </widget>
           </item>
@@ -780,6 +780,18 @@ QPushButton:checked{
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_10">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLabel" name="colorbarLabel">
                <property name="minimumSize">
@@ -789,7 +801,7 @@ QPushButton:checked{
                 </size>
                </property>
                <property name="text">
-                <string>Colorbar</string>
+                <string>Colormap</string>
                </property>
               </widget>
              </item>
@@ -824,6 +836,18 @@ QPushButton:checked{
              </sizepolicy>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_12">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <layout class="QHBoxLayout" name="minmaxLabellayout">
                <item>
@@ -1212,8 +1236,8 @@ QPushButton:checked{
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>115</width>
-                   <height>43</height>
+                   <width>221</width>
+                   <height>69</height>
                   </rect>
                  </property>
                  <property name="sizePolicy">
@@ -1339,8 +1363,8 @@ QPushButton:checked{
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>95</width>
-                   <height>40</height>
+                   <width>221</width>
+                   <height>69</height>
                   </rect>
                  </property>
                  <attribute name="label">
@@ -1401,8 +1425,8 @@ QPushButton:checked{
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>182</width>
-                   <height>60</height>
+                   <width>221</width>
+                   <height>69</height>
                   </rect>
                  </property>
                  <attribute name="label">
@@ -1451,8 +1475,8 @@ QPushButton:checked{
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>100</width>
-                   <height>30</height>
+                   <width>221</width>
+                   <height>69</height>
                   </rect>
                  </property>
                  <attribute name="label">

@@ -1,7 +1,7 @@
 import sys
 from PySide6.QtWidgets import QApplication, QFileDialog, QTreeWidgetItem, QLabel, QVBoxLayout, QWidget, QProgressBar, QMessageBox
 from PySide6.QtGui import QTransform, QFont
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Signal, Slot, QFileInfo
 import pyqtgraph as pg
 import numpy as np
 import os
@@ -16,6 +16,7 @@ example_file = os.path.join(current_folder,'Examples\\testPsHetImage.gwy')
 uiclass, baseclass = pg.Qt.loadUiType(ui_file)
 
 class MainWindow(uiclass, baseclass):
+    meas_loaded = Signal()
     def __init__(self):
         super().__init__()
         # Load UI
@@ -51,6 +52,7 @@ class MainWindow(uiclass, baseclass):
         self.saveButton.toggled.connect(lambda: self.LeftMenuStack.setCurrentIndex(1))
         self.colorbarcomboBox.currentTextChanged.connect(self.colormapChanged)
         self.resetcolorbarButton.clicked.connect(lambda: self.update_image(self.measurement))
+        self.meas_loaded.connect(self.updateHeaderLabel)
 
         # Create default plot
         self.current_file_name = example_file
@@ -97,6 +99,8 @@ class MainWindow(uiclass, baseclass):
     def load_meas(self):
             channelname = self.channelcombobox.currentText()
             self.measurement.read_from_gwyfile(self.current_file_name,channelname)
+            finfo = QFileInfo(self.measurement.filename)
+            self.measurement.meas_name = str(finfo.fileName())
             self.correctedMeasList = [self.measurement]
             print(f'Amp: {self.measurement.isamp}, Phase: {self.measurement.isphase}, Topo: {self.measurement.istopo}')
             if self.measurement.istopo:
@@ -110,6 +114,7 @@ class MainWindow(uiclass, baseclass):
 
             self.update_image(self.measurement)
             print(np.shape(self.measurement.data),'datapoints were loaded')
+            self.meas_loaded.emit()
 
     def update_image(self,m):
         self.imItem.setImage(image = m.data)
@@ -132,6 +137,9 @@ class MainWindow(uiclass, baseclass):
     def colormapChanged(self,value):
         self.colorMapName = value
         self.update_image(self.measurement)
+
+    def updateHeaderLabel(self):
+         self.headerLabel.setText(f'{self.measurement.meas_name} - {self.measurement.channel_name}')
 
     def ApplySingleCorrection(self):
          methodidx = self.correctionsToolBox.currentIndex()
