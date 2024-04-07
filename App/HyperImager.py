@@ -223,7 +223,7 @@ class MainWindow(uiclass, baseclass):
         self.update_image(self.measurement)
 
     def putPlaneROIs(self):
-        roi_radius = 5
+        roi_radius = 11
         while len(self.plane_rois) < 3:
             posx = random.randint(roi_radius, self.measurement.xres-roi_radius-1)
             posy = random.randint(roi_radius, self.measurement.yres-roi_radius-1)
@@ -262,7 +262,7 @@ class MainWindow(uiclass, baseclass):
                     self.overlay[int(y[idx]),int(x[idx])] = 1
                     self.yfiltered.append(int(y[idx]))
                     self.xfiltered.append(int(x[idx]))
-                    self.dfiltered.append(int(d[idx]))
+                    self.dfiltered.append((d[idx]))
                 else:
                     pass
 
@@ -302,7 +302,7 @@ class MainWindow(uiclass, baseclass):
         plt.show()
 
         if outputobj.isamp:
-            outputobj.data = (10*Z)/background
+            outputobj.data = (Z)/background
         else:
             outputobj.data = Z-background
 
