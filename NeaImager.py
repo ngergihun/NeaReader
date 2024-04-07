@@ -9,12 +9,12 @@ class NeaImage:
         self.channel_name = None
         self.meas_name = None
         # Important measurement parameters from gwyddion file
-        self.xreal = None
-        self.yreal = None
-        self.xoff = None
-        self.yoff = None
-        self.xres = None
-        self.yres = None
+        self.xreal = None   # Physical image width
+        self.yreal = None   # Physical image height
+        self.xoff = None    # Center position X
+        self.yoff = None    # Center position Y
+        self.xres = None    # Pixel size in X
+        self.yres = None    # Pixel size in Y
         self.isamp  = None # Amplitude -True or phase/topography - false - VERY IMPORTANT
         self.istopo = None
         self.isphase = None
