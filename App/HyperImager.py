@@ -32,7 +32,6 @@ class MainWindow(uiclass, baseclass):
         self.channelcombobox.setCurrentIndex(4)
         self.measinfo_treeWidget.setColumnCount(2)
         self.measinfo_treeWidget.setHeaderLabels(["Property", "Value"])
-        self.nextButton.setText("\U0001F87A")
         self.prevButton.setText("\U0001F878")
         self.linelevelComboBox.addItems(['Mean','Median','Median of differences'])
         self.selfRefcomboBox.addItems(['1','2','3','4','5'])
@@ -58,6 +57,8 @@ class MainWindow(uiclass, baseclass):
         self.resetcolorbarButton.clicked.connect(lambda: self.update_image(self.measurement))
         self.DrawROIs_button.clicked.connect(self.putPlaneROIs)
         self.CancelROIs_button.clicked.connect(self.removePlaneROIs)
+        self.correctionsToolBox.currentChanged.connect(self.resetCorrectionParameters)
+        self.prevButton.clicked.connect(self.backinHistory)
         self.meas_loaded.connect(self.updateHeaderLabel)
 
         # Create default plot
@@ -295,12 +296,6 @@ class MainWindow(uiclass, baseclass):
 
         background = np.sum(c[:, None, None] * np.array(get_basis(X, Y, 1, 1)).reshape(len(basis), *X.shape), axis=0)
 
-        fig = plt.figure()
-        ax = fig.add_subplot(projection='3d')
-        ax.plot_surface(X, Y, background, cmap='viridis')
-        ax.scatter(self.xfiltered,self.yfiltered,b)
-        plt.show()
-
         if outputobj.isamp:
             outputobj.data = (Z)/background
         else:
@@ -308,6 +303,17 @@ class MainWindow(uiclass, baseclass):
 
         return outputobj, background
 
+    def resetCorrectionParameters(self):
+        self.removePlaneROIs()
+
+    def backinHistory(self):
+        if len(self.correctedMeasList) > 1:
+            self.correctedMeasList = self.correctedMeasList[0:-1]
+            self.measurement = self.correctedMeasList[-1]
+            self.update_image(self.measurement)
+        else:
+            pass
+        
     # UI function staff
     def tree_from_dict(self, data=None, parent=None):
         self.measinfo_treeWidget.clear()
