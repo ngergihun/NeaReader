@@ -9,7 +9,7 @@ import os
 sys.path.append(os.getcwd())
 import NeaImager as neaim
 import copy
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 # from qt_material import apply_stylesheet
 
 current_folder = os.getcwd()
@@ -67,7 +67,8 @@ class MainWindow(uiclass, baseclass):
         # CREATE AND CUSTOMIZE PLOT WIDGET
         pg.setConfigOptions(imageAxisOrder='row-major')                                 #TODO: check if this is needed
         self.imItem = pg.ImageItem()                                                    # create an ImageItem
-        self.plotContainer.addItem(self.imItem)                                                             # add it to the PlotWidget
+        self.plotContainer.invertY(True)
+        self.plotContainer.addItem(self.imItem)                                         # add it to the PlotWidget
         self.cbar = self.plotContainer.addColorBar(self.imItem,colorMap=self.colorMapName,rounding=0.001)   # Create a colorBarItem and add to the PlotWidget
         self.cbar.sigLevelsChanged.connect(self.updateCbarSpinboxes)
         self.plotContainer.setBackground('w')
