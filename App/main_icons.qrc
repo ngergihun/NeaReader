@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="leftmenu_icons">
+    <file>icons/cut_blue.svg</file>
     <file>icons/cog_gray.svg</file>
     <file>icons/vslider_gray.svg</file>
     <file>icons/wrench_gray.svg</file>

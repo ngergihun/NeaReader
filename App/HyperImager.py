@@ -1,7 +1,7 @@
 import sys
 from PySide6.QtWidgets import QApplication, QFileDialog, QTreeWidgetItem, QLabel, QVBoxLayout, QWidget, QProgressBar, QMessageBox
 from PySide6.QtGui import QTransform, QFont
-from PySide6.QtCore import Qt, Signal, Slot, QFileInfo
+from PySide6.QtCore import Qt, Signal, Slot, QFileInfo, QPointF
 import pyqtgraph as pg
 import numpy as np
 import random
@@ -59,6 +59,7 @@ class MainWindow(uiclass, baseclass):
         self.CancelROIs_button.clicked.connect(self.removePlaneROIs)
         self.correctionsToolBox.currentChanged.connect(self.resetCorrectionParameters)
         self.prevButton.clicked.connect(self.backinHistory)
+        self.cutButton.clicked.connect(self.putCutROI)
         self.meas_loaded.connect(self.updateHeaderLabel)
 
         # Create default plot
@@ -134,6 +135,7 @@ class MainWindow(uiclass, baseclass):
             print(f'Amp: {self.measurement.isamp}, Phase: {self.measurement.isphase}, Topo: {self.measurement.istopo}')
             if self.measurement.istopo:
                  self.colorMapName = 'CET-L1'
+                 self.measurement.data = self.measurement.data*1e9
             elif self.measurement.isphase:
                 self.colorMapName = 'CET-D1A'
             elif self.measurement.isamp:
@@ -154,9 +156,12 @@ class MainWindow(uiclass, baseclass):
             self.cbar.setLevels(values = (np.min(m.data),np.max(m.data)))
             self.minCb.setValue(np.min(m.data))
             self.maxCb.setValue(np.max(m.data))
-        # tr = QTransform()                                   # TODO: prepare ImageItem transformation
-        # tr.scale(m.xreal*1000, m.yreal*1000)                # scale horizontal and vertical axes
-        # self.imItem.setTransform(tr)
+        tr = QTransform()                                   # TODO: prepare ImageItem transformation
+        tr.reset()
+        self.imItem.setTransform(tr)
+        tr.scale(m.xreal/m.xres*1000000, m.yreal/m.yres*1000000)                # scale horizontal and vertical axes
+        self.imItem.setTransform(tr)
+        self.imItem_overlay.setTransform(tr)
 
     def updateCbarSpinboxes(self):
         v = self.cbar.levels()
@@ -226,13 +231,21 @@ class MainWindow(uiclass, baseclass):
 
     def putPlaneROIs(self):
         roi_radius = 11
+
+        itr = QTransform()
+        itr.reset()
+        self.imItem.setTransform(itr)
+        self.imItem_overlay.setTransform(itr)
+
         while len(self.plane_rois) < 3:
             posx = random.randint(roi_radius, self.measurement.xres-roi_radius-1)
             posy = random.randint(roi_radius, self.measurement.yres-roi_radius-1)
-            self.plane_rois.append(pg.CircleROI([posx, posy], radius=roi_radius, translateSnap=True, rotatable=False, scaleSnap=True, ))
+            self.plane_rois.append(pg.CircleROI([posx, posy], radius=roi_radius, translateSnap=True, rotatable=False, scaleSnap=True))
+
             self.plotContainer.addItem(self.plane_rois[-1])
-            self.plane_rois[-1].sigRegionChanged.connect(self.updatePlaneRoi)
-        self.updatePlaneRoi()
+
+            self.plane_rois[-1].sigRegionChanged.connect(lambda: self.updateRoiOverlay(self.plane_rois[-1]))
+        self.updateRoiOverlay(self.plane_rois)
 
     def removePlaneROIs(self):
         while not len(self.plane_rois) == 0:
@@ -243,16 +256,27 @@ class MainWindow(uiclass, baseclass):
         self.imItem_overlay.setImage(image = self.overlay)
         self.imItem_overlay.setOpts(opacity = 0)
 
-    def updatePlaneRoi(self):
+    def putCutROI(self):
+        itr = QTransform()
+        itr.reset()
+        self.imItem.setTransform(itr)
+
+        self.cutROI = pg.RectROI([0, 0], [self.measurement.xres, self.measurement.yres])
+        self.plotContainer.addItem(self.cutROI)
+        self.cutROI.sigRegionChanged.connect(lambda: self.updateRoiOverlay(self.cutROI))
+
+    def updateRoiOverlay(self,rois):
         self.xfiltered = []
         self.yfiltered = []
         self.dfiltered = []
         self.overlay = np.zeros(np.shape(self.imItem.image))
 
-        for roi in self.plane_rois:
+        # for roi in rois:
+        for i in range(len(rois)):
+            roi = rois[i]
             datacut, coords = roi.getArrayRegion(self.imItem.image, img=self.imItem, returnMappedCoords=True)
             print(f'Shape of datacut: {np.shape(datacut)}, shape of coords: {np.shape(coords)}')
-
+            
             # Separate coordinates and data array and flatten them
             Xcoords = coords[1,:,:]
             Ycoords = coords[0,:,:] # if axis set is row-major
@@ -262,8 +286,8 @@ class MainWindow(uiclass, baseclass):
             for idx, dval in enumerate(d):
                 if not dval == 0.:
                     self.overlay[int(y[idx]),int(x[idx])] = 1
-                    self.yfiltered.append(int(y[idx]))
-                    self.xfiltered.append(int(x[idx]))
+                    self.yfiltered.append((y[idx]))
+                    self.xfiltered.append((x[idx]))
                     self.dfiltered.append((d[idx]))
                 else:
                     pass
@@ -328,7 +352,6 @@ class MainWindow(uiclass, baseclass):
 
     def prevCorrectionPage(self):
         self.CorrectionsQStack.setCurrentIndex(self.CorrectionsQStack.currentIndex() - 1)
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

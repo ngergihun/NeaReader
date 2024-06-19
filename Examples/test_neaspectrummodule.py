@@ -6,7 +6,7 @@ import numpy as np
 
 # Choose a measurement file
 current_folder = os.getcwd()
-file_name = os.path.join(current_folder,'Examples\\pte_spectrum.txt')
+file_name = os.path.join(current_folder,'Examples\\testspectrum.txt')
 
 # Create NeaSpectrom object and load data
 s = neas.NeaSpectrum()
@@ -22,8 +22,8 @@ print(s.parameters["Description"])
 # Check scan (measurement) type
 print(s.parameters["Scan"])
 # Check data size and plot some spectrum
-print(np.shape(s.data["PTE"]))
-plt.plot(s.data["Wavenumber"][0,0,:], s.data["PTE"][0,0,:])
+print(np.shape(s.data["O2A"]))
+plt.plot(s.data["Wavenumber"][:], s.data["O2A"][:])
 plt.show()
 
 # To save a specific data channel: (this will save the wavenumber and the choosen channel to a dat file columnwise)
