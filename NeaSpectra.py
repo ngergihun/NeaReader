@@ -152,6 +152,10 @@ class NeaSpectrum:
                         if dounwrap:
                             self.data[channelP][i,k,:] = np.unwrap(self.data[channelP][i,k,:])
 
+    def reshapeForImshow(self):
+        plotdata = np.reshape(np.ravel(self.data["O2A"]),(self.parameters["PixelArea"][0],self.parameters["PixelArea"][2]))
+        return plotdata
+
 class NeaInterferogram:
     def __init__(self) -> None:
         self.filename = None # Full path with name

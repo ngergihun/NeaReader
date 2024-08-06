@@ -1,6 +1,8 @@
 import gwyfile
+from gsffile import read_gsf
 import numpy as np
 import copy
+import re
 
 class NeaImage:
     def __init__(self) -> None:
@@ -23,7 +25,7 @@ class NeaImage:
         # Other parameters from info txt -  Dictionary
         self.parameters = None
 
-    def read_from_gwyfile(self,filename: str, channelname: str):
+    def read_from_gwyfile(self, filename: str, channelname: str):
         self.filename = filename
         self.channel_name = channelname
         gwyobj = gwyfile.load(self.filename)
@@ -36,6 +38,30 @@ class NeaImage:
             if key in dir(self):
                 setattr(self,key,channel[key])
         self.data = channel.data
+
+    def read_from_gsffile(self, filename: str, channelname: str):
+        self.filename = filename
+        self.channel_name = channelname
+        self.isAmplitude()
+
+        data, metadata = read_gsf(self.filename)
+
+        self.xres = np.shape(data)[1]
+        self.yres = np.shape(data)[0]
+        self.xoff = metadata["XOffset"]
+        self.yoff = metadata["YOffset"]
+        self.xreal = metadata["XReal"]
+        self.yreal = metadata["YReal"]
+        
+        # channel_strings = [' O(.?)A raw', ' M(.?)A raw', ' O(.?)P raw', ' M(.?)P raw', ' Z C', ' Z raw']
+        # for pattern in channel_strings:
+        #     if type(re.search(pattern, self.filename)) is not None:
+        #         self.channel_name = re.search(pattern, self.filename)[0]
+        #         print(self.channel_name)
+        #         return
+
+        self.data = data
+        # self.isAmplitude()
 
     def isAmplitude(self):
         if 'A' in self.channel_name:
