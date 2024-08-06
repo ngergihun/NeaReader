@@ -39,10 +39,8 @@ class NeaImage:
                 setattr(self,key,channel[key])
         self.data = channel.data
 
-    def read_from_gsffile(self, filename: str, channelname: str):
+    def read_from_gsffile(self, filename: str, channelname = 'auto'):
         self.filename = filename
-        self.channel_name = channelname
-        self.isAmplitude()
 
         data, metadata = read_gsf(self.filename)
 
@@ -52,17 +50,21 @@ class NeaImage:
         self.yoff = metadata["YOffset"]
         self.xreal = metadata["XReal"]
         self.yreal = metadata["YReal"]
-        
-        # channel_strings = [' O(.?)A raw', ' M(.?)A raw', ' O(.?)P raw', ' M(.?)P raw', ' Z C', ' Z raw']
-        # for pattern in channel_strings:
-        #     if type(re.search(pattern, self.filename)) is not None:
-        #         self.channel_name = re.search(pattern, self.filename)[0]
-        #         print(self.channel_name)
-        #         return
-
         self.data = data
-        # self.isAmplitude()
+        
+        if channelname == 'auto':
+            channel_strings = [' M(.?)A raw', ' M(.?)P raw', ' O(.?)A raw', ' O(.?)P raw', ' Z C', ' Z raw']
+            for pattern in channel_strings:
+                if re.search(pattern, self.filename) is not None:
+                    self.channel_name = re.search(pattern, self.filename)[0]
+            if self.channel_name is None:
+                self.channel_name = "Z raw"
+                print('ERROR: channel name was not set properly! Considered as TOPOGRAPHY!')
+        else:
+            self.channel_name = channelname
 
+        self.isAmplitude()
+    
     def isAmplitude(self):
         if 'A' in self.channel_name:
             self.isamp = True
